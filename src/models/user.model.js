@@ -45,12 +45,12 @@ const userSchema = new mongoose.Schema({
 },{timestamps: true});
 userSchema.pre("save", async function  (next) {
     if(!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password,10);
+    this.password = await bcrypt.hash(this.password,10);
     next();
 })
 // custom method
 userSchema.methods.isPasswordCorrect = async function (Password) {
-   return await bcrypt.compare(password,this.password);  // return true or false
+   return await bcrypt.compare(Password, this.password);  // return true or false
 }
 // no need of async since fast
 // Arrow functions don’t handle this properly in Mongoose methods.

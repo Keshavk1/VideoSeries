@@ -10,7 +10,7 @@ constructor(statusCode,message = "Something went wrong",errors = [],stack=""  ){
     if(stack){
         this.stack = stack;
     }else{
-        this.stack = Error.captureStackTrace(this, this.constructor);
+        Error.captureStackTrace(this, this.constructor);
     }
 }
 }
